@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dimdim Pizza Mirabel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ─────────────────────────────────────────── */
+:root{
+  --bg:#0D0A07; --s1:#131008; --s2:#1A1510; --s3:#231D16;
+  --red:#C4392A; --red2:#E04535; --red-g:rgba(196,57,42,.22);
+  --gold:#CB8C0E; --gold2:#ECA81C; --gold-g:rgba(236,168,28,.15);
+  --grn:#22C55E; --grn2:#16A34A;
+  --tx:#F5EFE6; --tx2:#C5B8A6; --mt:#8A7A68; --mt2:#4E4438;
+  --bd:#2A2218; --bd2:#3C3228;
+  --fh:'Playfair Display',Georgia,serif;
+  --fb:'DM Sans',sans-serif;
+  --r:6px; --r2:3px;
+}
+
+/* ── RESET ──────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--red);border-radius:4px}
+img{display:block;max-width:100%}
+
+/* ── GRAIN OVERLAY ──────────────────────────────────── */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.038;pointer-events:none;z-index:9998}
+
+/* ── NAV ────────────────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:1.5rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.scrolled{background:rgba(13,10,7,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:1rem 3rem;border-bottom:1px solid var(--bd)}
+.logo{display:flex;align-items:center;gap:.85rem;text-decoration:none}
+.logo img{height:40px;border-radius:var(--r2)}
+.logo-txt{font-family:var(--fh);font-size:1.3rem;font-weight:700;color:var(--tx);letter-spacing:.03em}
+.logo-txt em{font-style:normal;color:var(--red)}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
+.nav-links a{color:var(--mt);text-decoration:none;font-size:.76rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:color .3s}
+.nav-links a:hover{color:var(--tx)}
+.nav-cta{background:var(--red) !important;color:#fff !important;padding:.5rem 1.4rem;border-radius:var(--r2) !important;transition:background .3s !important}
+.nav-cta:hover{background:var(--red2) !important}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.ham span{width:24px;height:2px;background:var(--tx);display:block;transition:all .3s}
+
+/* ── MOBILE NAV ─────────────────────────────────────── */
+.mnav{display:none;position:fixed;inset:0;background:rgba(13,10,7,.99);z-index:299;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mnav.open{display:flex}
+.mnav a{font-family:var(--fh);font-size:2.5rem;font-weight:700;color:var(--tx);text-decoration:none;transition:color .3s;letter-spacing:.02em}
+.mnav a:hover{color:var(--red)}
+.mnav-x{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:var(--mt);font-size:2rem;cursor:pointer;line-height:1}
+
+/* ── HERO ────────────────────────────────────────────── */
+.hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1920&q=85') center/cover no-repeat;transform:scale(1.06);animation:hzoom 16s ease-out forwards}
+@keyframes hzoom{to{transform:scale(1)}}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(13,10,7,.92) 0%,rgba(13,10,7,.75) 50%,rgba(13,10,7,.45) 100%)}
+.hero-glow{position:absolute;top:20%;right:15%;width:600px;height:600px;background:radial-gradient(circle,rgba(196,57,42,.18) 0%,transparent 70%);pointer-events:none}
+.hero-c{position:relative;z-index:2;max-width:700px;padding:0 3rem;animation:hfade 1s ease-out .3s both}
+@keyframes hfade{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero-chip{display:inline-flex;align-items:center;gap:.5rem;background:rgba(196,57,42,.15);border:1px solid rgba(196,57,42,.3);border-radius:20px;padding:.35rem 1rem;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:2rem}
+.hero-dot{width:7px;height:7px;border-radius:50%;background:var(--grn);box-shadow:0 0 8px var(--grn);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-h1{font-family:var(--fh);font-size:clamp(3.8rem,8vw,7rem);font-weight:900;line-height:.92;color:var(--tx);margin-bottom:1.25rem;letter-spacing:-.01em}
+.hero-h1 em{font-style:italic;color:var(--red)}
+.hero-rule{width:56px;height:3px;background:linear-gradient(to right,var(--red),var(--gold));margin-bottom:1.5rem;border-radius:2px}
+.hero-p{font-size:1rem;color:var(--tx2);margin-bottom:2.5rem;line-height:1.7;max-width:480px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-scroll{position:absolute;bottom:2.5rem;left:3rem;z-index:2;display:flex;align-items:center;gap:.75rem;color:var(--mt);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;animation:fade2 1s ease .8s both}
+@keyframes fade2{from{opacity:0}to{opacity:1}}
+.hero-scroll-line{width:40px;height:1px;background:linear-gradient(to right,var(--mt),transparent)}
+
+/* ── BUTTONS ─────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;border-radius:var(--r2);font-family:var(--fb);font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:all .28s}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 10px 28px rgba(196,57,42,.4)}
+.btn-wa{background:var(--grn);color:#fff}.btn-wa:hover{background:var(--grn2);transform:translateY(-2px);box-shadow:0 10px 28px rgba(34,197,94,.35)}
+.btn-ghost{background:transparent;color:var(--tx);border:1px solid rgba(245,239,230,.2)}.btn-ghost:hover{border-color:var(--tx);transform:translateY(-2px)}
+
+/* ── TICKER ──────────────────────────────────────────── */
+.ticker-wrap{background:var(--red);padding:.7rem 0;overflow:hidden;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(0,0,0,.2)}
+.ticker{display:flex;gap:0;width:max-content;animation:ticker 30s linear infinite}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker span{white-space:nowrap;padding:0 2.5rem;font-size:.75rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.9)}
+.ticker span::after{content:'✦';margin-left:2.5rem;opacity:.5}
+
+/* ── SECTION BASE ────────────────────────────────────── */
+section{padding:7rem 0}
+.container{max-width:1200px;margin:0 auto;padding:0 2.5rem}
+.slabel{font-size:.68rem;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;display:block}
+.stitle{font-family:var(--fh);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:700;line-height:1.06;color:var(--tx)}
+.stitle em{font-style:italic;color:var(--red)}
+.rule{width:44px;height:2px;background:linear-gradient(to right,var(--red),var(--gold));margin:1.5rem 0;border-radius:2px}
+
+/* ── ABOUT ───────────────────────────────────────────── */
+#apropos{background:var(--s1)}
+.about-grid{display:grid;grid-template-columns:5fr 6fr;gap:6rem;align-items:center}
+.about-img-wrap{position:relative}
+.about-img-frame{position:absolute;inset:-12px;border:1px solid rgba(196,57,42,.25);border-radius:var(--r);pointer-events:none}
+.about-img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--r);display:block}
+.about-badge{position:absolute;bottom:-1.5rem;right:-1.5rem;width:136px;height:136px;background:var(--red);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem;box-shadow:0 8px 32px rgba(196,57,42,.4)}
+.about-badge strong{font-family:var(--fh);font-size:2.6rem;font-weight:900;color:#fff;line-height:1}
+.about-badge span{font-size:.58rem;color:rgba(255,255,255,.85);letter-spacing:.1em;text-transform:uppercase}
+.about-quote{font-family:var(--fh);font-size:1.6rem;font-weight:400;font-style:italic;color:var(--tx2);line-height:1.5;border-left:2px solid var(--red);padding-left:1.5rem;margin-bottom:2rem}
+.about-text p{font-size:.93rem;color:var(--mt);line-height:1.85;margin-bottom:1rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:2.5rem;background:var(--bd);border:1px solid var(--bd)}
+.stat{text-align:center;padding:1.5rem 1rem;background:var(--s2)}
+.stat strong{font-family:var(--fh);font-size:2.2rem;font-weight:700;color:var(--gold2);display:block;line-height:1}
+.stat span{font-size:.65rem;color:var(--mt);letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem;display:block}
+
+/* ── GALLERY ─────────────────────────────────────────── */
+.gallery-sec{background:var(--bg);padding:6rem 0}
+.gallery-intro{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;gap:2rem;flex-wrap:wrap}
+.g-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:280px 280px;gap:12px}
+.g-item{overflow:hidden;border-radius:var(--r);position:relative;cursor:pointer}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.g-item:hover img{transform:scale(1.07)}
+.g-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(13,10,7,.5) 0%,transparent 50%);opacity:0;transition:opacity .4s}
+.g-item:hover::after{opacity:1}
+.g1{grid-column:span 5;grid-row:span 2}
+.g2{grid-column:span 4}
+.g3{grid-column:span 3}
+.g4{grid-column:span 3}
+.g5{grid-column:span 4;grid-row:span 1}
+.g6{grid-column:span 4}
+@media(max-width:900px){.g-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.g1,.g2,.g3,.g4,.g5,.g6{grid-column:span 1;grid-row:span 1;height:220px}}
+@media(max-width:600px){.g-grid{grid-template-columns:1fr;grid-template-rows:auto}.g1,.g2,.g3,.g4,.g5,.g6{height:240px}}
+
+/* ── TESTIMONIALS ────────────────────────────────────── */
+.testi-sec{background:var(--s1);padding:5rem 0}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:3rem}
+.tcard{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:2rem;position:relative;overflow:hidden;transition:border-color .3s;display:flex;flex-direction:column}
+.tcard::before{content:'"';position:absolute;top:-.5rem;left:1.25rem;font-family:var(--fh);font-size:6rem;color:var(--red);opacity:.12;line-height:1;font-style:italic}
+.tcard:hover{border-color:var(--bd2)}
+.tcard-stars{color:var(--gold2);font-size:.85rem;margin-bottom:.35rem;letter-spacing:.05em}
+.tcard-meta{display:flex;align-items:center;gap:.45rem;margin-bottom:.2rem;font-size:.8rem;color:var(--mt);font-weight:500}
+.tcard-badge{background:rgba(196,57,42,.13);color:var(--red);border-radius:30px;padding:.1rem .55rem;font-size:.67rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.tcard-date{font-size:.72rem;color:var(--mt);opacity:.65;margin-bottom:.9rem}
+.tcard-text{font-size:.875rem;color:var(--tx2);line-height:1.8;margin-bottom:.6rem;position:relative;flex:1}
+.tcard-more{background:none;border:none;color:var(--red);font-size:.8rem;cursor:pointer;padding:0;font-family:var(--fb);font-weight:600;letter-spacing:.03em;margin-bottom:1.1rem;display:inline-block;transition:opacity .2s}
+.tcard-more:hover{opacity:.7}
+.tcard-author{font-size:.75rem;font-weight:500;color:var(--mt);letter-spacing:.08em;text-transform:uppercase;border-top:1px solid var(--bd);padding-top:.9rem;margin-top:auto}
+
+/* ── MENU ────────────────────────────────────────────── */
+.menu-sec{background:var(--s1)}
+.menu-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:0}
+.menu-hint{font-size:.82rem;color:var(--mt);margin-top:.5rem}
+.menu-hint strong{color:var(--red)}
+.menu-tabs{display:flex;overflow-x:auto;margin:2.5rem 0 0;gap:.4rem;scrollbar-width:none;padding-bottom:2px}
+.menu-tabs::-webkit-scrollbar{display:none}
+.mtab{padding:.55rem 1.2rem;font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);cursor:pointer;border:1px solid transparent;background:transparent;border-radius:30px;white-space:nowrap;transition:all .25s;font-family:var(--fb)}
+.mtab:hover{color:var(--tx);border-color:var(--bd2)}
+.mtab.active{color:var(--tx);background:var(--red);border-color:var(--red)}
+.mpanel{display:none;padding:2rem 0 3rem}.mpanel.active{display:block}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1rem}
+
+/* ── MENU CARD ───────────────────────────────────────── */
+.mcard{background:var(--s2);border:1px solid var(--bd);padding:1.35rem;border-radius:var(--r);transition:all .28s;position:relative;display:flex;flex-direction:column;overflow:hidden}
+.mcard::after{content:'';position:absolute;inset:0;border-radius:var(--r);border:1px solid transparent;background:linear-gradient(135deg,rgba(196,57,42,.3),transparent,rgba(236,168,28,.15)) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);mask-composite:exclude;opacity:0;transition:opacity .3s;pointer-events:none}
+.mcard:hover{border-color:rgba(196,57,42,.2);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 0 0 transparent}
+.mcard:hover::after{opacity:1}
+.mcard-cat{font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--mt);margin-bottom:.6rem}
+.mcard-name{font-family:var(--fh);font-size:1.1rem;font-weight:600;color:var(--tx);line-height:1.3;margin-bottom:.4rem}
+.mcard-desc{font-size:.79rem;color:var(--mt);line-height:1.55;flex:1}
+.mcard-foot{display:flex;align-items:center;justify-content:space-between;margin-top:1rem;padding-top:.9rem;border-top:1px solid var(--bd)}
+.mcard-price{font-family:var(--fh);font-size:1.05rem;font-weight:700;color:var(--gold2)}
+.add-btn{width:36px;height:36px;border-radius:50%;background:var(--red);border:none;color:#fff;font-size:1.25rem;font-weight:300;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .22s;flex-shrink:0;line-height:1}
+.add-btn:hover{background:var(--red2);transform:scale(1.12);box-shadow:0 6px 18px rgba(196,57,42,.5)}
+.add-btn:active{transform:scale(.9)}
+.add-btn.added{background:var(--grn);animation:addPop .35s ease}
+@keyframes addPop{0%{transform:scale(1)}50%{transform:scale(1.28)}100%{transform:scale(1)}}
+.menu-note{font-size:.79rem;color:var(--mt);font-style:italic;margin-top:1.5rem;padding:1rem 1.25rem;border-left:2px solid var(--bd2);background:var(--s2);border-radius:0 var(--r2) var(--r2) 0}
+
+/* ── ORDER ───────────────────────────────────────────── */
+.order-sec{background:var(--bg);position:relative;padding-top:8rem}
+.order-sec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--red),var(--gold),transparent)}
+.order-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:start}
+.order-left h2{margin-bottom:.5rem}
+.order-desc{font-size:.9rem;color:var(--mt);line-height:1.8;margin-bottom:2.5rem}
+.olink{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--bd);text-decoration:none;color:var(--mt);transition:color .3s}
+.olink:hover{color:var(--tx)}
+.olink-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.oi-r{background:rgba(196,57,42,.12);color:var(--red)}
+.oi-g{background:rgba(34,197,94,.12);color:var(--grn)}
+.oi-o{background:rgba(236,168,28,.12);color:var(--gold2)}
+.olink-txt strong{display:block;font-size:.82rem;font-weight:500;color:var(--tx)}
+.olink-txt span{font-size:.76rem;color:var(--mt)}
+.ohours{margin-top:2rem;background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:1.5rem}
+.ohours h4{font-family:var(--fh);font-size:1rem;font-weight:600;margin-bottom:.9rem}
+.oh-row{display:flex;justify-content:space-between;padding:.38rem 0;border-bottom:1px solid var(--bd);font-size:.8rem}
+.oh-row:last-child{border:none}
+.oh-row.today span{color:var(--gold2)}
+
+/* ── FORM PANEL ──────────────────────────────────────── */
+.fpanel{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
+.fpanel-head{padding:2rem 2rem 1.5rem;background:linear-gradient(135deg,var(--s2) 0%,var(--s1) 100%);border-bottom:1px solid var(--bd)}
+.fpanel-head h3{font-family:var(--fh);font-size:1.8rem;font-weight:700;color:var(--tx)}
+.fpanel-head p{font-size:.8rem;color:var(--mt);margin-top:.2rem}
+.fpanel-body{padding:2rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.fg{margin-bottom:1.1rem}
+.fg label{display:block;font-size:.67rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--mt);margin-bottom:.4rem}
+.fg input,.fg select,.fg textarea{width:100%;background:var(--s2);border:1px solid var(--bd);color:var(--tx);padding:.72rem 1rem;border-radius:var(--r2);font-family:var(--fb);font-size:.86rem;font-weight:300;transition:border-color .25s,box-shadow .25s;appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(196,57,42,.1)}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--mt2)}
+.fg select option{background:var(--s2)}
+.fg textarea{height:78px;resize:none}
+.ftype{display:flex;gap:.6rem;margin-bottom:1.1rem}
+.ftr{flex:1;position:relative}
+.ftr input[type=radio]{position:absolute;opacity:0}
+.ftr label{display:block;padding:.65rem .8rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r2);cursor:pointer;text-align:center;font-size:.76rem;font-weight:500;color:var(--mt);transition:all .25s}
+.ftr input:checked+label{border-color:var(--red);color:var(--red);background:rgba(196,57,42,.07)}
+
+/* Cart preview */
+.cart-preview{border:1px solid var(--bd);border-radius:var(--r2);overflow:hidden;margin-bottom:1.1rem}
+.cp-head{padding:.7rem 1rem;background:var(--s3);display:flex;justify-content:space-between;align-items:center}
+.cp-head span{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mt)}
+.cp-head button{font-size:.72rem;color:var(--red);background:none;border:none;cursor:pointer;font-family:var(--fb)}
+.cp-body{padding:.75rem 1rem;background:var(--s2)}
+.cp-empty{font-size:.8rem;color:var(--mt);text-align:center;padding:.5rem 0}
+.cp-item{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--bd);font-size:.8rem}
+.cp-item:last-child{border:none}
+.cp-item-n{color:var(--tx);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cp-item-q{color:var(--mt);margin:0 .5rem}
+.cp-item-p{color:var(--gold2);font-weight:500}
+.factions{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.25rem}
+.fbtn{padding:.95rem;border-radius:var(--r2);font-family:var(--fb);font-size:.76rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:.45rem;transition:all .28s}
+.fbtn-wa{background:var(--grn);color:#fff}.fbtn-wa:hover{background:var(--grn2);transform:translateY(-2px);box-shadow:0 8px 22px rgba(34,197,94,.3)}
+.fbtn-mail{background:var(--red);color:#fff}.fbtn-mail:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 8px 22px rgba(196,57,42,.3)}
+
+/* ── LOCATION ────────────────────────────────────────── */
+.loc-sec{background:var(--s1)}
+.loc-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:5rem;align-items:start}
+.htable{width:100%;border-collapse:collapse;margin-top:1.5rem}
+.htable tr{border-bottom:1px solid var(--bd)}
+.htable td{padding:.85rem 0;font-size:.86rem}
+.htable td:first-child{font-weight:500;color:var(--tx);width:52%}
+.htable td:last-child{color:var(--mt);text-align:right}
+.htable tr.today td{color:var(--gold2)}
+.map-wrap{border-radius:var(--r);overflow:hidden;border:1px solid var(--bd);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.map-wrap iframe{width:100%;height:380px;border:none;filter:grayscale(.25) contrast(1.08) brightness(.95)}
+.addr-card{margin-top:1rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:1.4rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.addr-item{font-size:.84rem;color:var(--mt);line-height:1.7}
+.addr-item strong{display:block;font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mt2);margin-bottom:.3rem}
+.addr-item a{color:var(--tx);text-decoration:none;transition:color .3s}
+.addr-item a:hover{color:var(--red)}
+
+/* ── FOOTER ──────────────────────────────────────────── */
+footer{background:#080605;border-top:1px solid var(--bd);padding:5rem 0 2.5rem}
+.footer-top{display:grid;grid-template-columns:2.5fr 1fr 1fr 1.5fr;gap:3rem;margin-bottom:3.5rem}
+.footer-brand-name{font-family:var(--fh);font-size:1.8rem;font-weight:700;color:var(--tx);margin:.85rem 0 .6rem}
+.footer-brand-name em{font-style:normal;color:var(--red)}
+.footer-desc{font-size:.82rem;color:var(--mt);line-height:1.7;margin-bottom:1.5rem;max-width:280px}
+.fh4{font-size:.66rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--mt2);margin-bottom:1.1rem}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.flinks a{font-size:.84rem;color:var(--mt);text-decoration:none;transition:color .3s}
+.flinks a:hover{color:var(--tx)}
+.fcontact p{font-size:.84rem;color:var(--mt);line-height:2}
+.fcontact a{color:var(--mt);text-decoration:none;transition:color .3s}
+.fcontact a:hover{color:var(--tx)}
+.footer-bottom{border-top:1px solid var(--bd);padding-top:1.75rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.fcopy,.fpow{font-size:.73rem;color:rgba(138,122,104,.45)}
+
+/* ── CART FAB ────────────────────────────────────────── */
+.cart-fab{position:fixed;bottom:2rem;right:2rem;z-index:350;width:58px;height:58px;background:var(--red);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(196,57,42,.5),0 0 0 0 rgba(196,57,42,.3);transition:all .3s}
+.cart-fab:hover{background:var(--red2);transform:scale(1.08);box-shadow:0 12px 40px rgba(196,57,42,.6)}
+.cart-fab svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cart-badge{position:absolute;top:-5px;right:-5px;min-width:22px;height:22px;padding:0 5px;background:var(--gold2);border-radius:11px;color:#0D0A07;font-size:.68rem;font-weight:700;display:none;align-items:center;justify-content:center;font-family:var(--fb)}
+.cart-badge.show{display:flex;animation:pop .3s ease}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
+
+/* ── CART DRAWER ─────────────────────────────────────── */
+.cart-ov{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:490;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(3px)}
+.cart-ov.open{opacity:1;pointer-events:all}
+.cart-dr{position:fixed;top:0;right:0;bottom:0;width:100%;max-width:490px;background:var(--s1);z-index:500;transform:translateX(110%);transition:transform .38s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;border-left:1px solid var(--bd)}
+.cart-dr.open{transform:translateX(0)}
+.cdr-head{padding:1.5rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.cdr-title{font-family:var(--fh);font-size:1.4rem;font-weight:700;color:var(--tx)}
+.cdr-count{font-size:.76rem;color:var(--mt);margin-top:.1rem}
+.cdr-close{background:none;border:none;color:var(--mt);font-size:1.5rem;cursor:pointer;padding:.2rem;line-height:1;transition:color .2s}
+.cdr-close:hover{color:var(--tx)}
+.cdr-items{flex:1;overflow-y:auto;padding:1rem 1.25rem}
+.cdr-items::-webkit-scrollbar{width:3px}.cdr-items::-webkit-scrollbar-thumb{background:var(--bd2)}
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:1.25rem;color:var(--mt);text-align:center}
+.cart-empty svg{width:60px;height:60px;opacity:.2;stroke:currentColor;fill:none;stroke-width:1.5}
+.cart-empty p{font-size:.88rem}
+.cart-empty a{color:var(--red);text-decoration:none;font-size:.82rem}
+.ci{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:.95rem;margin-bottom:.7rem}
+.ci-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem}
+.ci-name{font-family:var(--fh);font-size:.95rem;font-weight:600;color:var(--tx);line-height:1.3}
+.ci-meta{font-size:.72rem;color:var(--mt);margin-top:.2rem}
+.ci-note{font-size:.72rem;color:var(--gold);font-style:italic;margin-top:.25rem}
+.ci-rm{background:none;border:none;color:var(--mt);cursor:pointer;font-size:.95rem;line-height:1;transition:color .2s;flex-shrink:0}
+.ci-rm:hover{color:var(--red)}
+.ci-bot{display:flex;align-items:center;justify-content:space-between;margin-top:.8rem;padding-top:.75rem;border-top:1px solid var(--bd)}
+.ci-price{font-family:var(--fh);font-size:1rem;font-weight:700;color:var(--gold2)}
+.ciqty{display:flex;align-items:center;border:1px solid var(--bd);border-radius:var(--r2);overflow:hidden}
+.ciqb{width:30px;height:30px;background:var(--s1);border:none;color:var(--tx);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.ciqb:hover{background:var(--s3)}
+.ciqv{width:34px;height:30px;text-align:center;background:var(--s2);border:none;color:var(--tx);font-size:.82rem;font-weight:500;pointer-events:none}
+.cdr-sub{padding:1rem 1.25rem;border-top:1px solid var(--bd);flex-shrink:0}
+.cdr-total-row{display:flex;justify-content:space-between;padding:.35rem 0;font-size:.82rem}
+.cdr-total-row span:first-child{color:var(--mt)}
+.cdr-total-row span:last-child{font-family:var(--fh);font-size:.95rem;font-weight:600;color:var(--tx)}
+.cdr-total-row.grand span:last-child{font-size:1.2rem;color:var(--gold2)}
+.cdr-est{font-size:.68rem;color:var(--mt);font-style:italic;margin-top:.3rem}
+.cdr-form{padding:1.25rem;border-top:1px solid var(--bd);flex-shrink:0;background:var(--bg)}
+.cdr-form-title{font-family:var(--fh);font-size:1rem;font-weight:600;color:var(--tx);margin-bottom:.9rem}
+.cfrow{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.cfg{margin-bottom:.65rem}
+.cfg label{display:block;font-size:.64rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mt);margin-bottom:.3rem}
+.cfg input,.cfg select,.cfg textarea{width:100%;background:var(--s2);border:1px solid var(--bd);color:var(--tx);padding:.6rem .85rem;border-radius:var(--r2);font-family:var(--fb);font-size:.83rem;font-weight:300;transition:border-color .25s;appearance:none}
+.cfg input:focus,.cfg select:focus,.cfg textarea:focus{outline:none;border-color:var(--red)}
+.cfg input::placeholder,.cfg textarea::placeholder{color:var(--mt2)}
+.cfg select option{background:var(--s2)}
+.cfg textarea{height:60px;resize:none}
+.cftype{display:flex;gap:.5rem;margin-bottom:.65rem}
+.cfr{flex:1;position:relative}
+.cfr input{position:absolute;opacity:0}
+.cfr label{display:block;padding:.55rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r2);cursor:pointer;text-align:center;font-size:.72rem;font-weight:500;color:var(--mt);transition:all .22s}
+.cfr input:checked+label{border-color:var(--red);color:var(--red);background:rgba(196,57,42,.07)}
+.cdr-actions{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.25rem}
+.cdr-btn{padding:.8rem .5rem;border-radius:var(--r2);font-family:var(--fb);font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:.4rem;transition:all .28s}
+.cdr-btn-wa{background:var(--grn);color:#fff}.cdr-btn-wa:hover{background:var(--grn2);transform:translateY(-2px);box-shadow:0 6px 18px rgba(34,197,94,.3)}
+.cdr-btn-ml{background:var(--red);color:#fff}.cdr-btn-ml:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 6px 18px rgba(196,57,42,.3)}
+.cdr-btn:disabled{opacity:.35;cursor:not-allowed;transform:none !important}
+
+/* ── ITEM MODAL ──────────────────────────────────────── */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:400;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .28s;backdrop-filter:blur(6px)}
+.modal-ov.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--s2);border:1px solid var(--bd2);border-radius:var(--r);width:100%;max-width:460px;overflow:hidden;transform:translateY(18px) scale(.97);transition:transform .28s;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+.modal-ov.open .modal-box{transform:translateY(0) scale(1)}
+.modal-head{padding:1.4rem 1.5rem 1rem;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.modal-name{font-family:var(--fh);font-size:1.35rem;font-weight:700;color:var(--tx);line-height:1.2}
+.modal-desc-txt{font-size:.78rem;color:var(--mt);margin-top:.25rem}
+.modal-price-tag{font-family:var(--fh);font-size:1.1rem;font-weight:700;color:var(--gold2);white-space:nowrap;flex-shrink:0}
+.modal-x{background:none;border:none;color:var(--mt);font-size:1.3rem;cursor:pointer;padding:.2rem;line-height:1;transition:color .2s;flex-shrink:0}
+.modal-x:hover{color:var(--tx)}
+.modal-body{padding:1.4rem 1.5rem}
+.modal-sect{margin-bottom:1.2rem}
+.modal-lbl{font-size:.67rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--mt);margin-bottom:.55rem;display:block}
+.msizes{display:flex;gap:.45rem;flex-wrap:wrap}
+.mso{position:relative}
+.mso input{position:absolute;opacity:0;width:0;height:0}
+.mso label{display:block;padding:.42rem 1rem;background:var(--s1);border:1px solid var(--bd);border-radius:20px;cursor:pointer;font-size:.78rem;font-weight:500;color:var(--mt);transition:all .22s}
+.mso input:checked+label{border-color:var(--red);color:var(--tx);background:rgba(196,57,42,.12)}
+.mso label:hover{border-color:var(--bd2);color:var(--tx)}
+.qty-ctrl{display:flex;align-items:center;border:1px solid var(--bd);border-radius:var(--r2);overflow:hidden;width:fit-content}
+.qb{width:42px;height:42px;background:var(--s1);border:none;color:var(--tx);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.qb:hover{background:var(--s3)}
+.qv{width:52px;height:42px;text-align:center;background:var(--s2);border:none;color:var(--tx);font-family:var(--fb);font-size:.95rem;font-weight:600;pointer-events:none}
+.modal-note-inp{width:100%;background:var(--s1);border:1px solid var(--bd);color:var(--tx);padding:.72rem 1rem;border-radius:var(--r2);font-family:var(--fb);font-size:.83rem;font-weight:300;resize:none;height:82px;transition:border-color .25s;line-height:1.5}
+.modal-note-inp:focus{outline:none;border-color:var(--red)}
+.modal-note-inp::placeholder{color:var(--mt2)}
+.modal-foot{padding:1rem 1.5rem 1.5rem}
+.modal-add{width:100%;padding:1rem;background:var(--red);color:#fff;border:none;border-radius:var(--r2);font-family:var(--fb);font-size:.82rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .28s;display:flex;align-items:center;justify-content:center;gap:.6rem}
+.modal-add:hover{background:var(--red2);box-shadow:0 8px 24px rgba(196,57,42,.4)}
+
+/* ── TOAST ───────────────────────────────────────────── */
+.toast{position:fixed;bottom:5.5rem;right:2rem;z-index:600;background:var(--s2);border:1px solid var(--bd2);border-left:3px solid var(--grn);padding:.7rem 1.1rem;border-radius:var(--r);font-size:.8rem;color:var(--tx);transform:translateX(130%);transition:transform .32s cubic-bezier(.4,0,.2,1);max-width:280px}
+.toast.show{transform:translateX(0)}
+
+/* ── FADE UP ─────────────────────────────────────────── */
+.fu{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.fu.vis{opacity:1;transform:translateY(0)}
+.fu:nth-child(2){transition-delay:.08s}.fu:nth-child(3){transition-delay:.16s}.fu:nth-child(4){transition-delay:.24s}
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media(max-width:1024px){.about-grid{grid-template-columns:1fr 1fr;gap:3.5rem}.footer-top{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem}.nav-links{display:none}.ham{display:flex}
+  .hero-c{padding:0 2rem}.hero-h1{font-size:clamp(3rem,10vw,5rem)}
+  .about-grid,.order-grid,.loc-grid{grid-template-columns:1fr;gap:3rem}
+  .about-badge{right:0}.testi-grid{grid-template-columns:1fr}
+  .cart-dr{max-width:100%}.cfrow{grid-template-columns:1fr}.cdr-actions{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}.factions{grid-template-columns:1fr}
+  .addr-card{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  section{padding:5rem 0}.container{padding:0 1.25rem}
+  nav{padding:1rem 1.25rem}.hero-c{padding:0 1.25rem}
+  .footer-top{grid-template-columns:1fr}.about-stats{grid-template-columns:1fr 1fr}
+  .hero-btns{flex-direction:column;align-items:flex-start}.g-grid{gap:8px}
+  .mgrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#accueil" class="logo">
+    <img src="https://cdn.restomenu.com/web/img/place/129/d3108bf50b0591e69155aee1f2e784fc.png" alt="Dimdim Pizza">
+    <span class="logo-txt">Dimdim <em>Pizza</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#apropos">Histoire</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#commander">Commander</a></li>
+    <li><a href="#localisation">Localisation</a></li>
+    <li><a href="#menu" class="nav-cta">Commandez</a></li>
+  </ul>
+  <button class="ham" id="ham"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mnav" id="mnav">
+  <button class="mnav-x" id="mnavX">✕</button>
+  <a href="#apropos" class="mnl">Histoire</a>
+  <a href="#galerie" class="mnl">Galerie</a>
+  <a href="#menu" class="mnl">Menu</a>
+  <a href="#commander" class="mnl">Commander</a>
+  <a href="#localisation" class="mnl">Localisation</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-bg"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-c">
+    <div class="hero-chip">
+      <span class="hero-dot"></span>
+      Mirabel, Québec — Ouvert maintenant
+    </div>
+    <h1 class="hero-h1">La vraie<br><em>pizza</em><br>artisanale</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-p">Pâte fraîche, sauce maison, ingrédients généreux.<br>9955 Boul. de Saint-Canut, Mirabel · (450) 431-3555</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn btn-red">🍕 Commander maintenant</a>
+      <a href="#menu" class="btn btn-ghost">Voir le menu</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div>Défiler</div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>Pizzas 2 pour 1</span><span>Ouvert 7 jours sur 7</span><span>Sous-marins artisanaux</span>
+    <span>Poutines généreuses</span><span>Spécialités grecques</span><span>Méga spéciaux famille</span>
+    <span>Cueillette & livraison</span><span>Depuis plus de 20 ans</span>
+    <span>Pizzas 2 pour 1</span><span>Ouvert 7 jours sur 7</span><span>Sous-marins artisanaux</span>
+    <span>Poutines généreuses</span><span>Spécialités grecques</span><span>Méga spéciaux famille</span>
+    <span>Cueillette & livraison</span><span>Depuis plus de 20 ans</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="apropos">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap fu">
+        <div class="about-img-frame"></div>
+        <img class="about-img" src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=800&q=85" alt="Dimdim Pizza">
+        <div class="about-badge"><strong>20+</strong><span>ans</span></div>
+      </div>
+      <div class="fu">
+        <span class="slabel">Notre Histoire</span>
+        <h2 class="stitle">Passion,<br><em>Tradition</em> & Saveur</h2>
+        <div class="rule"></div>
+        <blockquote class="about-quote">« Ne jamais couper les coins ronds — c'est notre seul principe depuis le premier jour. »</blockquote>
+        <div class="about-text">
+          <p>Depuis plus de deux décennies, Dimdim Pizza s'est imposé comme une institution dans la région de Mirabel. Nichée au cœur du boulevard de Saint-Canut, notre pizzeria a bâti sa réputation sur la qualité et la générosité.</p>
+          <p>Chaque pizza est préparée à la commande, avec une pâte fraîche étirée à la main, une sauce tomate maison et des ingrédients soigneusement sélectionnés. Du pepperoni croustillant à nos spécialités grecques, chaque plat raconte notre passion.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat fu"><strong>20+</strong><span>Années</span></div>
+          <div class="stat fu"><strong>100+</strong><span>Articles</span></div>
+          <div class="stat fu"><strong>★ 4.5</strong><span>Évaluation</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-sec" id="galerie">
+  <div class="container">
+    <div class="gallery-intro">
+      <div class="fu">
+        <span class="slabel">Galerie</span>
+        <h2 class="stitle">La Passion<br>du <em>Métier</em></h2>
+      </div>
+      <p class="fu" style="font-size:.88rem;color:var(--mt);max-width:320px;line-height:1.75">Chaque pizza, chaque plat — un reflet de notre engagement pour la qualité artisanale.</p>
+    </div>
+    <div class="g-grid fu">
+      <div class="g-item g1"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700&q=85" alt="Pizza signature Dimdim"></div>
+      <div class="g-item g2"><img src="https://images.unsplash.com/photo-1554433607-66b5efe9d304?w=600&q=85" alt="Sous-marin artisanal"></div>
+      <div class="g-item g3"><img src="https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?w=500&q=85" alt="Ambiance restaurant"></div>
+      <div class="g-item g4"><img src="https://images.unsplash.com/photo-1549759593-29b53c6e4717?w=500&q=85" alt="Poutine généreuse"></div>
+      <div class="g-item g5"><img src="https://images.unsplash.com/photo-1734974121561-11aee7d3cebd?w=600&q=85" alt="Spécialité grecque"></div>
+      <div class="g-item g6"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=85" alt="Spécialité maison"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec">
+  <div class="container">
+    <span class="slabel fu">Avis Google</span>
+    <h2 class="stitle fu">Ce Que Disent Nos <em>Clients</em></h2>
+    <div class="testi-grid">
+
+      <!-- Nicole Levasseur -->
+      <div class="tcard fu">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-meta">Nicole Levasseur <span class="tcard-badge">Guide local</span></div>
+        <div class="tcard-date">il y a 6 mois · 13 avis</div>
+        <p class="tcard-text" data-id="r1">J'adore ce petit resto. Tout ce que j'ai commandé me rappelais les restos de mon enfance. Même si la spécialité est davantage pour le menu Grecque...</p>
+        <button class="tcard-more" onclick="toggleReview(this)" data-x="0">Voir plus…</button>
+        <div class="tcard-author">Nicole L. — Mirabel</div>
+      </div>
+
+      <!-- Emilie Jolicoeur -->
+      <div class="tcard fu">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-meta">Emilie Jolicoeur</div>
+        <div class="tcard-date">il y a 7 mois · 4 avis</div>
+        <p class="tcard-text" data-id="r2">Nous avons appelé le 5 octobre à 18:15 et la jeune fille qui nous a répondu au téléphone a été très polie et nous a offert un service au-delà de ce que nous attendions...</p>
+        <button class="tcard-more" onclick="toggleReview(this)" data-x="0">Voir plus…</button>
+        <div class="tcard-author">Emilie J. — À emporter · 20–30 $</div>
+      </div>
+
+      <!-- Mathys Théberge-Legault -->
+      <div class="tcard fu">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-meta">Mathys Théberge-Legault</div>
+        <div class="tcard-date">il y a 11 mois · 5 avis</div>
+        <p class="tcard-text" data-id="r3">J'ai récemment eu l'occasion de découvrir ce petit restaurant de pizza qui cache bien son jeu ! Dès l'entrée, l'ambiance chaleureuse et conviviale m'a mis en appétit...</p>
+        <button class="tcard-more" onclick="toggleReview(this)" data-x="0">Voir plus…</button>
+        <div class="tcard-author">Mathys T-L. — Mirabel</div>
+      </div>
+
+      <!-- Valérie -->
+      <div class="tcard fu">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-meta">Valérie <span class="tcard-badge">Guide local</span></div>
+        <div class="tcard-date">il y a 7 mois · 24 avis</div>
+        <p class="tcard-text" data-id="r4">Mes repas sont toujours bons ! Toujours eu un très bon service depuis 10 ans.. absolument rien à dire de négatif 🙂</p>
+        <div class="tcard-author">Valérie — Cliente fidèle depuis 10 ans</div>
+      </div>
+
+      <!-- Gabriel D. -->
+      <div class="tcard fu">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-meta">Gabriel D.</div>
+        <div class="tcard-date">il y a 6 mois · 6 avis</div>
+        <p class="tcard-text" data-id="r5">La pizza à la viande était incroyable. Je recommande. Nouvelle franchise game changer !</p>
+        <div class="tcard-author">Gabriel D. — Mirabel</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-sec" id="menu">
+  <div class="container">
+    <div class="menu-header">
+      <div>
+        <span class="slabel fu">Découvrez</span>
+        <h2 class="stitle fu">Notre <em>Menu</em> Complet</h2>
+        <p class="menu-hint fu">Cliquez <strong>+</strong> sur un article pour le personnaliser et l'ajouter au panier.</p>
+      </div>
+    </div>
+    <div class="menu-tabs" id="menuTabs"></div>
+    <div id="menuPanels"></div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section class="order-sec" id="commander">
+  <div class="container">
+    <div class="order-grid">
+      <div class="order-left fu">
+        <span class="slabel">Commandez</span>
+        <h2 class="stitle">Simple &<br><em>Rapide</em></h2>
+        <div class="rule"></div>
+        <p class="order-desc">Ajoutez vos articles depuis le menu, complétez vos informations et envoyez votre commande directement par WhatsApp ou par courriel.</p>
+        <a href="tel:4504313555" class="olink">
+          <div class="olink-icon oi-r">📞</div>
+          <div class="olink-txt"><strong>(450) 431-3555</strong><span>Commande par téléphone</span></div>
+        </a>
+        <a href="https://wa.me/14504313555" class="olink" target="_blank">
+          <div class="olink-icon oi-g"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+          <div class="olink-txt"><strong>WhatsApp</strong><span>Réponse rapide garantie</span></div>
+        </a>
+        <div class="olink" style="cursor:default">
+          <div class="olink-icon oi-o">✉</div>
+          <div class="olink-txt"><strong>Formulaire en ligne</strong><span>Commande par courriel</span></div>
+        </div>
+        <div class="ohours">
+          <h4>Heures d'ouverture</h4>
+          <div class="oh-row" id="oh-lun"><span>Lun – Mer</span><span>11h – 22h</span></div>
+          <div class="oh-row" id="oh-jeu"><span>Jeudi</span><span>11h – 23h</span></div>
+          <div class="oh-row" id="oh-ven"><span>Ven – Sam</span><span>11h – 01h</span></div>
+          <div class="oh-row" id="oh-dim"><span>Dimanche</span><span>11h – 22h</span></div>
+        </div>
+      </div>
+      <div class="fpanel fu">
+        <div class="fpanel-head">
+          <h3>Votre Commande</h3>
+          <p>Complétez vos informations et envoyez directement.</p>
+        </div>
+        <div class="fpanel-body">
+          <div class="fg">
+            <label>🛒 Articles sélectionnés</label>
+            <div class="cart-preview">
+              <div class="cp-head"><span id="ocp-count">Panier vide</span><button onclick="openCart()">Voir & modifier →</button></div>
+              <div class="cp-body" id="ocp-body"><div class="cp-empty">Parcourez le menu et cliquez <strong style="color:var(--red)">+</strong></div></div>
+            </div>
+          </div>
+          <div class="frow">
+            <div class="fg"><label>Prénom & Nom *</label><input type="text" id="f-name" placeholder="Jean Tremblay"></div>
+            <div class="fg"><label>Téléphone *</label><input type="tel" id="f-phone" placeholder="(450) 000-0000"></div>
+          </div>
+          <div class="fg"><label>Courriel</label><input type="email" id="f-email" placeholder="jean@exemple.com"></div>
+          <div class="frow">
+            <div class="fg"><label>Personnes</label>
+              <select id="f-people"><option value="1">1 personne</option><option value="2">2 personnes</option><option value="3">3 personnes</option><option value="4">4 personnes</option><option value="5-6">5–6 personnes</option><option value="7+">7+</option></select>
+            </div>
+            <div class="fg"><label>Heure souhaitée</label><input type="time" id="f-time"></div>
+          </div>
+          <div class="fg"><label>Type de commande</label>
+            <div class="ftype">
+              <div class="ftr"><input type="radio" name="ftype" id="r-pu" value="Cueillette" checked><label for="r-pu">🏪 Cueillette</label></div>
+              <div class="ftr"><input type="radio" name="ftype" id="r-de" value="Livraison"><label for="r-de">🛵 Livraison</label></div>
+            </div>
+          </div>
+          <div class="fg"><label>Notes / Adresse si livraison</label><textarea id="f-notes" placeholder="Adresse, allergies, commentaires..."></textarea></div>
+          <div class="factions">
+            <button class="fbtn fbtn-wa" onclick="orderWhatsApp()"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Via WhatsApp</button>
+            <button class="fbtn fbtn-mail" onclick="orderEmail()">✉ Via Courriel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="loc-sec" id="localisation">
+  <div class="container">
+    <div class="loc-grid">
+      <div class="fu">
+        <span class="slabel">Trouvez-nous</span>
+        <h2 class="stitle">Heures &<br><em>Localisation</em></h2>
+        <div class="rule"></div>
+        <table class="htable">
+          <tr id="ht-lun"><td>Lundi – Mercredi</td><td>11h00 – 22h00</td></tr>
+          <tr id="ht-jeu"><td>Jeudi</td><td>11h00 – 23h00</td></tr>
+          <tr id="ht-ven"><td>Vendredi – Samedi</td><td>11h00 – 01h00</td></tr>
+          <tr id="ht-dim"><td>Dimanche</td><td>11h00 – 22h00</td></tr>
+        </table>
+      </div>
+      <div class="fu">
+        <div class="map-wrap"><iframe src="https://maps.google.com/maps?q=9955+Boulevard+de+Saint+Canut,+Mirabel,+QC+J7N+1K1&output=embed&z=15" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+        <div class="addr-card">
+          <div class="addr-item"><strong>Adresse</strong><a href="https://maps.google.com/maps?q=9955+Boulevard+de+Saint+Canut,+Mirabel,+QC" target="_blank">9955 Boul. de Saint-Canut<br>Mirabel, Québec J7N 1K1</a></div>
+          <div class="addr-item"><strong>Téléphone</strong><a href="tel:4504313555">(450) 431-3555</a><br><a href="https://wa.me/14504313555" target="_blank" style="color:var(--grn)">WhatsApp →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <img src="https://cdn.restomenu.com/web/img/place/129/d3108bf50b0591e69155aee1f2e784fc.png" alt="Dimdim Pizza" style="height:38px;border-radius:3px">
+        <div class="footer-brand-name">Dimdim <em>Pizza</em></div>
+        <p class="footer-desc">Pizzeria authentique au cœur de Mirabel depuis plus de 20 ans. Pâte fraîche, ingrédients de qualité, saveurs inoubliables.</p>
+        <a href="https://wa.me/14504313555" target="_blank" class="btn btn-wa" style="font-size:.73rem;padding:.65rem 1.4rem">Commander par WhatsApp</a>
+      </div>
+      <div><p class="fh4">Navigation</p><ul class="flinks"><li><a href="#accueil">Accueil</a></li><li><a href="#apropos">Notre Histoire</a></li><li><a href="#galerie">Galerie</a></li><li><a href="#menu">Menu</a></li><li><a href="#commander">Commander</a></li></ul></div>
+      <div><p class="fh4">Menu</p><ul class="flinks"><li><a href="#menu">Pizzas 2 pour 1</a></li><li><a href="#menu">Méga Spéciaux</a></li><li><a href="#menu">Sous-Marins</a></li><li><a href="#menu">Poutines</a></li><li><a href="#menu">Spécialités Grecques</a></li></ul></div>
+      <div class="fcontact"><p class="fh4">Contact</p><p>📞 <a href="tel:4504313555">(450) 431-3555</a><br>📍 9955 Boul. de Saint-Canut<br>Mirabel, QC J7N 1K1<br><br>Lun–Mer : 11h – 22h<br>Jeu : 11h – 23h<br>Ven–Sam : 11h – 01h<br>Dim : 11h – 22h</p></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="fcopy">© 2026 Dimdim Pizza Mirabel. Tous droits réservés.</p>
+      <p class="fpow">Fait avec ❤ à Mirabel, Québec</p>
+    </div>
+  </div>
+</footer>
+
+<!-- CART FAB -->
+<button class="cart-fab" id="cartFab" onclick="openCart()">
+  <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+  <span class="cart-badge" id="cartBadge">0</span>
+</button>
+
+<!-- CART OVERLAY + DRAWER -->
+<div class="cart-ov" id="cartOv" onclick="closeCart()"></div>
+<div class="cart-dr" id="cartDr">
+  <div class="cdr-head">
+    <div><div class="cdr-title">Votre Panier</div><div class="cdr-count" id="drCount">0 article</div></div>
+    <button class="cdr-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cdr-items" id="drItems"></div>
+  <div class="cdr-sub" id="drSub" style="display:none">
+    <div class="cdr-total-row"><span>Sous-total estimé</span><span id="drTotal">0,00 $</span></div>
+    <div class="cdr-total-row grand"><span>Total</span><span id="drGrand">0,00 $</span></div>
+    <p class="cdr-est">* Prix approximatifs. Le restaurant confirmera le total final.</p>
+  </div>
+  <div class="cdr-form">
+    <div class="cdr-form-title">📋 Vos informations</div>
+    <div class="cfrow"><div class="cfg"><label>Nom *</label><input id="cf-name" placeholder="Jean Tremblay"></div><div class="cfg"><label>Téléphone *</label><input type="tel" id="cf-phone" placeholder="(450) 000-0000"></div></div>
+    <div class="cfg"><label>Courriel</label><input type="email" id="cf-email" placeholder="jean@exemple.com"></div>
+    <div class="cfrow"><div class="cfg"><label>Personnes</label><select id="cf-people"><option value="1">1 personne</option><option value="2">2 personnes</option><option value="3">3 personnes</option><option value="4">4 personnes</option><option value="5-6">5–6</option><option value="7+">7+</option></select></div><div class="cfg"><label>Heure</label><input type="time" id="cf-time"></div></div>
+    <div class="cftype"><div class="cfr"><input type="radio" name="cftype" id="cf-pu" value="Cueillette" checked><label for="cf-pu">🏪 Cueillette</label></div><div class="cfr"><input type="radio" name="cftype" id="cf-de" value="Livraison"><label for="cf-de">🛵 Livraison</label></div></div>
+    <div class="cfg"><label>Notes / Adresse</label><textarea id="cf-notes" placeholder="Adresse de livraison, allergies..."></textarea></div>
+    <div class="cdr-actions">
+      <button class="cdr-btn cdr-btn-wa" id="drBtnWa" onclick="cartWA()" disabled><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</button>
+      <button class="cdr-btn cdr-btn-ml" id="drBtnMl" onclick="cartMail()" disabled>✉ Courriel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ITEM MODAL -->
+<div class="modal-ov" id="itemModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><div class="modal-name" id="modal-name"></div><div class="modal-desc-txt" id="modal-desc"></div></div>
+      <div style="display:flex;align-items:center;gap:.75rem;flex-shrink:0"><span class="modal-price-tag" id="modal-price"></span><button class="modal-x" onclick="closeModal()">✕</button></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-sect" id="modal-sizes-sec">
+        <span class="modal-lbl">Taille</span>
+        <div class="msizes" id="modal-sizes"></div>
+      </div>
+      <div class="modal-sect">
+        <span class="modal-lbl">Quantité</span>
+        <div class="qty-ctrl"><button class="qb" onclick="chgQty(-1)">−</button><input class="qv" id="mQty" type="number" value="1" min="1" max="20" readonly><button class="qb" onclick="chgQty(1)">+</button></div>
+      </div>
+      <div class="modal-sect">
+        <span class="modal-lbl">Instructions spéciales <span style="font-weight:300;font-size:.62rem;letter-spacing:0;text-transform:none;color:var(--mt2)">(optionnel)</span></span>
+        <textarea class="modal-note-inp" id="mNote" placeholder="Ex: sans cornichons, extra fromage, bien cuit, sans oignons..."></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="modal-add" onclick="confirmAdd()">➕ Ajouter au panier — <span id="mAddPrice"></span></button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══ MENU DATA ═══════════════════════════════════════════════════
+const MENU=[
+  {id:'pizza2',label:'Pizzas 2 pour 1',sizes:['10″','12″','14″','16″','18″'],note:'Prix pour 2 pizzas de même format.',items:[
+    {name:'Base (Sauce & Fromage)',desc:'Sauce tomate maison, mozzarella fondant.',price:'dès 27,54 $',pn:27.54},
+    {name:'Pepperoni',desc:'Pepperoni généreux sur sauce signature.',price:'dès 28,54 $',pn:28.54},
+    {name:'Hawaïenne',desc:'Jambon fumé et ananas.',price:'dès 28,80 $',pn:28.80},
+    {name:'Toute Garnie',desc:'Pepperoni, champignons, poivrons.',price:'dès 30,54 $',pn:30.54},
+    {name:'Pepperoni Bacon',desc:'Pepperoni croustillant, bacon fumé, oignons.',price:'dès 30,90 $',pn:30.90},
+    {name:'Spéciale Dimdim',desc:'Notre signature : bacon, pepperoni, jambon.',price:'dès 31,54 $',pn:31.54},
+    {name:'Mexicaine',desc:'Sauce piquante, oignons, olives, tomates, bœuf.',price:'dès 31,54 $',pn:31.54},
+    {name:'Poulet',desc:'Poulet grillé, oignons, tomates.',price:'dès 32,54 $',pn:32.54},
+    {name:'Spéciale du Chef',desc:'Pepperoni, bacon, oignons, saucisse.',price:'dès 32,54 $',pn:32.54},
+    {name:'Santé',desc:'Légumes frais et feta méditerranéenne.',price:'dès 32,54 $',pn:32.54},
+    {name:'Québec',desc:'Pepperoni, champignons, bacon.',price:'dès 32,90 $',pn:32.90},
+    {name:'Spéciale Mama',desc:'Pepperoni, champignons, poivrons, olives, bacon.',price:'dès 32,90 $',pn:32.90},
+    {name:'Deluxe',desc:'Pepperoni, champignons, oignons, poivrons, bacon.',price:'dès 33,54 $',pn:33.54},
+    {name:'New York Style',desc:'Double pepperoni, double fromage.',price:'dès 33,54 $',pn:33.54},
+    {name:'Sicilienne',desc:'Champignons, oignons, piments forts, smoked meat, ail.',price:'dès 33,90 $',pn:33.90},
+    {name:'Shish Taouk',desc:'Poulet mariné, oignons, tomates, piments forts.',price:'dès 33,90 $',pn:33.90},
+    {name:'Végétarienne',desc:'Champignons, oignons, olives, tomates, poivrons.',price:'dès 33,90 $',pn:33.90},
+    {name:'Chick Pizza',desc:'Champignons, oignons, poivrons, saucisse, bacon, tomates.',price:'dès 33,90 $',pn:33.90},
+    {name:'Amoureux de la Viande',desc:'Bœuf, jambon, pepperoni, bacon, saucisses.',price:'dès 34,10 $',pn:34.10},
+    {name:'Internationale',desc:'Toute garnie, bacon, smoked meat, fromage extra.',price:'dès 34,90 $',pn:34.90},
+  ]},
+  {id:'pizzaseule',label:'Pizza Seule',sizes:['10″','12″','14″','16″','18″'],note:'Pizza individuelle.',items:[
+    {name:'Base',desc:'Sauce tomate maison, mozzarella.',price:'dès 17,90 $',pn:17.90},
+    {name:'Pepperoni',desc:'Pepperoni généreux.',price:'dès 18,55 $',pn:18.55},
+    {name:'Hawaïenne',desc:'Jambon et ananas.',price:'dès 18,72 $',pn:18.72},
+    {name:'Toute Garnie',desc:'Pepperoni, champignons, poivrons.',price:'dès 19,85 $',pn:19.85},
+    {name:'Pepperoni Bacon',desc:'Pepperoni, bacon, oignons.',price:'dès 20,09 $',pn:20.09},
+    {name:'Spéciale Dimdim',desc:'Bacon, pepperoni, jambon.',price:'dès 20,50 $',pn:20.50},
+    {name:'Mexicaine',desc:'Sauce, oignons, olives, tomates, bœuf.',price:'dès 20,50 $',pn:20.50},
+    {name:'Poulet',desc:'Poulet, oignons, tomates.',price:'dès 21,15 $',pn:21.15},
+    {name:'Spéciale du Chef',desc:'Pepperoni, bacon, oignons, saucisse.',price:'dès 21,15 $',pn:21.15},
+    {name:'Santé',desc:'Légumes frais et feta.',price:'dès 21,15 $',pn:21.15},
+    {name:'Québec',desc:'Pepperoni, champignons, bacon.',price:'dès 21,39 $',pn:21.39},
+    {name:'Spéciale Mama',desc:'Pepperoni, champignons, poivrons, olives, bacon.',price:'dès 21,39 $',pn:21.39},
+    {name:'Deluxe',desc:'Pepperoni, champignons, oignons, poivrons, bacon.',price:'dès 21,80 $',pn:21.80},
+    {name:'New York Style',desc:'Double pepperoni, double fromage.',price:'dès 21,80 $',pn:21.80},
+    {name:'Sicilienne',desc:'Champignons, oignons, piments forts, smoked meat, ail.',price:'dès 22,04 $',pn:22.04},
+    {name:'Shish Taouk',desc:'Poulet mariné, oignons, tomates, piments forts.',price:'dès 22,04 $',pn:22.04},
+    {name:'Végétarienne',desc:'Champignons, oignons, olives, tomates, poivrons.',price:'dès 22,04 $',pn:22.04},
+    {name:'Amoureux de la Viande',desc:'Bœuf, jambon, pepperoni, bacon, saucisses.',price:'dès 22,17 $',pn:22.17},
+    {name:'Internationale',desc:'Toute garnie, bacon, smoked meat, fromage extra.',price:'dès 22,68 $',pn:22.68},
+  ]},
+  {id:'mega',label:'Méga Spéciaux',sizes:null,note:'Forfaits complets avec boissons.',items:[
+    {name:'Méga #01',desc:'2 pizzas 10″ + sous-marin + ailes/nuggets + frites/poutine + brownies + boissons.',price:'46,99 $',pn:46.99},
+    {name:'Méga #02',desc:'2 pizzas 12″ + sous-marin + ailes/nuggets + frites/poutine + brownies + boissons.',price:'51,99 $',pn:51.99},
+    {name:'Méga #03',desc:'2 pizzas 14″ + sous-marin + ailes/nuggets + frites/poutine + brownies + boissons.',price:'57,99 $',pn:57.99},
+    {name:'Méga #04',desc:'2 sous-marins 10″ + grande poutine + boissons.',price:'39,99 $',pn:39.99},
+    {name:'Méga #05',desc:'2 pizzas 14″ + frites familiales + boissons.',price:'52,99 $',pn:52.99},
+    {name:'Spécial du Chef',desc:'Pizza 16″ + salade César + grande poutine + pain magique + rondelles + brownies + boissons.',price:'54,99 $',pn:54.99},
+    {name:'Spécial Hockey',desc:'2 pizzas 16″ + frites familiales + boissons.',price:'55,99 $',pn:55.99},
+    {name:'Quatro Spécial',desc:'4 petites pizzas 8″ au choix.',price:'35,99 $',pn:35.99},
+  ]},
+  {id:'trios',label:'Trios',sizes:null,note:'Combos complets.',items:[
+    {name:'Trio #01',desc:'Pizza 10″ + petites frites + boisson.',price:'23,79 $',pn:23.79},
+    {name:'Trio #02',desc:'Pizza 12″ + petites frites + boisson.',price:'29,15 $',pn:29.15},
+    {name:'Trio #03',desc:'Pizza 14″ + frites moyennes + 2 boissons.',price:'32,99 $',pn:32.99},
+    {name:'Trio #04',desc:'Pizza 16″ + grandes frites + 2 boissons.',price:'38,99 $',pn:38.99},
+    {name:'Trio #05',desc:'Pizza 12″ + 8 ailes ou grande poutine + boisson.',price:'32,99 $',pn:32.99},
+    {name:'Trio #06',desc:'Pizza 14″ + 12 ailes/nuggets/grande poutine + 2 boissons.',price:'36,99 $',pn:36.99},
+    {name:'Trio #07',desc:'Sous-marin 7″ + petites frites + boisson.',price:'20,99 $',pn:20.99},
+    {name:'Trio #09',desc:'Pizza 14″ + 15 ailes + grande poutine + 2 boissons.',price:'42,95 $',pn:42.95},
+    {name:'Trio #10',desc:'Pizza 16″ + 20 ailes + grande poutine + 2 boissons.',price:'49,99 $',pn:49.99},
+    {name:'Trio #15',desc:'Pizza 14″ + sous-marin 10″ + frites moyennes + 2 boissons.',price:'43,99 $',pn:43.99},
+    {name:'Trio #16',desc:'Pizza 16″ + sous-marin 14″ + frites familiales + 2 boissons.',price:'54,99 $',pn:54.99},
+    {name:'Trio #19',desc:'Burger poulet ou cheeseburger + petite poutine + boisson.',price:'17,99 $',pn:17.99},
+  ]},
+  {id:'subs',label:'Sous-Marins',sizes:['7″','10″','14″'],note:'Servis chauds.',items:[
+    {name:'#1 Steak & Pepperoni',desc:'Steak haché juteux et pepperoni grillé.',price:'dès 17,99 $',pn:17.99},
+    {name:'#2 Steak, Pepperoni & Champignons',desc:'Trio classique et généreux.',price:'dès 17,99 $',pn:17.99},
+    {name:'#3 Steak & Steak',desc:'Double steak haché.',price:'dès 17,99 $',pn:17.99},
+    {name:'#4 Spécial St-Canut',desc:'Jambon & bacon.',price:'dès 17,99 $',pn:17.99},
+    {name:'#5 Steak & Bacon',desc:'Steak et bacon croustillant.',price:'dès 17,99 $',pn:17.99},
+    {name:'#6 Steak, Pepperoni, Champignons, Oignons & Poivrons',desc:'Le sous-marin complet.',price:'dès 19,49 $',pn:19.49},
+    {name:'#7 Pepperoni, Champignons, Oignons & Poivrons',desc:'Saveurs italiennes.',price:'dès 19,49 $',pn:19.49},
+    {name:'#8 Poulet, Champignons, Oignons & Poivrons',desc:'Poulet grillé et légumes.',price:'dès 17,99 $',pn:17.99},
+    {name:'#9 Gyros',desc:'Viande gyros et tzatziki maison.',price:'dès 19,49 $',pn:19.49},
+    {name:'#10 Végétarien',desc:'Champignons, oignons, poivrons.',price:'dès 17,99 $',pn:17.99},
+    {name:'#11 Spécial Maison',desc:'Steak, bacon, poulet, champignons, oignons, poivrons.',price:'dès 20,49 $',pn:20.49},
+  ]},
+  {id:'poutines',label:'Poutines',sizes:null,note:'Fromage en grains du Québec.',items:[
+    {name:'Poutine Classique',desc:'Frites, sauce brune maison, fromage en grains.',price:'9,99 $',pn:9.99},
+    {name:'Poutine Familiale',desc:'Grande portion pour toute la famille.',price:'16,99 $',pn:16.99},
+    {name:'Poutine Italienne',desc:'Sauce tomate italienne, fromage en grains.',price:'15,24 $',pn:15.24},
+    {name:'Poutine au Poulet',desc:'Poulet grillé tendre.',price:'15,24 $',pn:15.24},
+    {name:'Poutine au Bacon',desc:'Bacon fumé croustillant.',price:'15,24 $',pn:15.24},
+    {name:'Poutine aux Saucisses',desc:'Saucisses italiennes et sauce brune.',price:'15,24 $',pn:15.24},
+    {name:'Poutine au Pepperoni',desc:'Pepperoni grillé, fromage fondant.',price:'15,24 $',pn:15.24},
+    {name:'Poutine Toute Garnie',desc:'Bacon, pepperoni, champignons.',price:'15,99 $',pn:15.99},
+    {name:'Poutine Deluxe',desc:'Garniture premium généreuse.',price:'18,99 $',pn:18.99},
+    {name:'Poutine aux Nuggets',desc:'Nuggets de poulet croustillants.',price:'16,20 $',pn:16.20},
+    {name:'Poutine Souvlaki',desc:'Brochettes de poulet souvlaki.',price:'18,99 $',pn:18.99},
+    {name:'Poutine Amoureux de la Viande',desc:'Bœuf, bacon, pepperoni, jambon.',price:'19,99 $',pn:19.99},
+  ]},
+  {id:'pates',label:'Pâtes & Salades',sizes:null,note:'Pâtes fraîches, salades préparées sur place.',items:[
+    {name:'Spaghetti Sauce Viande',desc:'Sauce bolognaise maison.',price:'13,75 $',pn:13.75},
+    {name:'Spaghetti Sauce Viande & Smoked Meat',desc:'Enrichi de smoked meat.',price:'17,50 $',pn:17.50},
+    {name:'Spaghetti Toute Garnie',desc:'Sauce aux légumes, champignons et viande.',price:'15,24 $',pn:15.24},
+    {name:'Spaghetti ou Lasagna Gratiné',desc:'Gratiné au four, mozzarella fondante.',price:'14,75 $',pn:14.75},
+    {name:'Salade au Poulet',desc:'Poulet grillé, légumes, vinaigrette maison.',price:'14,75 $',pn:14.75},
+    {name:'Salade au Jambon',desc:'Jambon, légumes, fromage.',price:'14,75 $',pn:14.75},
+    {name:'Salade du Chef',desc:'Laitue, tomates, concombres, fromage, croûtons.',price:'13,50 $',pn:13.50},
+    {name:'Salade Grecque',desc:'Tomates, concombres, olives, feta, oignons rouges.',price:'14,75 $',pn:14.75},
+    {name:'Salade César',desc:'Laitue romaine, croûtons, parmesan, sauce César.',price:'14,75 $',pn:14.75},
+  ]},
+  {id:'grecque',label:'Spécialités Grecques',sizes:null,note:'Recettes traditionnelles grecques.',items:[
+    {name:'Assiette Gyros',desc:'Gyros finement tranchés, frites et salade.',price:'17,99 $',pn:17.99},
+    {name:'Brochette de Poulet',desc:'Poulet mariné et grillé, frites et salade.',price:'17,99 $',pn:17.99},
+    {name:'Assiette Pita',desc:'Pita au poulet ou gyros, frites.',price:'15,99 $',pn:15.99},
+    {name:'Assiette Pita avec Poutine',desc:'Pita avec frites et poutine.',price:'18,99 $',pn:18.99},
+    {name:'Pita Seulement',desc:'Pita au poulet ou au gyros.',price:'11,24 $',pn:11.24},
+    {name:'Sauce Tzatziki',desc:'Tzatziki maison à la grecque.',price:'3,40 $',pn:3.40},
+    {name:'Ailes de Poulet',desc:'Ailes croustillantes, frites, sauce et coleslaw.',price:'16,50 $',pn:16.50},
+    {name:'Nuggets de Poulet',desc:'Nuggets dorés, frites, sauce et coleslaw.',price:'16,50 $',pn:16.50},
+  ]},
+  {id:'accos',label:'Accompagnements',sizes:null,note:'Pour compléter votre repas.',items:[
+    {name:'Burger (4 oz)',desc:'Burger de bœuf juteux.',price:'6,70 $',pn:6.70},
+    {name:'Hot Dog',desc:'Hot dog grillé classique.',price:'2,60 $',pn:2.60},
+    {name:'Pogo',desc:'Saucisse en pâte à frire.',price:'3,15 $',pn:3.15},
+    {name:'Rondelles d\'Oignon',desc:'Rondelles croustillantes.',price:'5,15 $',pn:5.15},
+    {name:'Frites avec Sauce',desc:'Frites maison, sauce brune.',price:'5,15 $',pn:5.15},
+    {name:'Frites Maison',desc:'Frites dorées croustillantes.',price:'5,80 $',pn:5.80},
+    {name:'Frites Épicées',desc:'Frites assaisonnées épicées.',price:'7,80 $',pn:7.80},
+    {name:'Pain Magique',desc:'Pain à l\'ail gratiné.',price:'13,99 $',pn:13.99},
+    {name:'Bâtonnets de Fromage',desc:'6 bâtonnets avec frites et sauce.',price:'16,99 $',pn:16.99},
+    {name:'Pain à l\'Ail',desc:'Pain à l\'ail beurré.',price:'3,20 $',pn:3.20},
+  ]},
+];
+
+// ═══ REVIEWS TOGGLE ══════════════════════════════════════════════
+const REVIEWS={
+  r1:{
+    short:"J'adore ce petit resto. Tout ce que j'ai commandé me rappelais les restos de mon enfance. Même si la spécialité est davantage pour le menu Grecque...",
+    full:"J'adore ce petit resto. Tout ce que j'ai commandé me rappelais les restos de mon enfance.\n\nMême si la spécialité est davantage pour le menu Grecque, les pizzas, les sous-marins, les clubs sandwiches sont excellents.\n\nMenu Grecque, les brochettes, les pitas, etc.... Tout est vraiment bon !\n\nIls ont également tous les menus de frites, hamburgers, salades, bref, tout ce qu'on retrouve dans ce genre de restaurant.\n\nLes portions sont généreuses.\n\nJ'ai toujours commandé par téléphone et j'ai toujours obtenu un excellent service. Livraison rapide, des livreurs super gentils.\n\nJe vous recommande de l'essayer. Les prix sont très abordables avec les choix de 2 pour 1 ou les combos.\n\nCuisine : 5 · Service : 5 · Ambiance : 5"
+  },
+  r2:{
+    short:"Nous avons appelé le 5 octobre à 18:15 et la jeune fille qui nous a répondu au téléphone a été très polie et nous a offert un service au-delà de ce que nous attendions...",
+    full:"Nous avons appelé le 5 octobre à 18:15 et la jeune fille qui nous a répondu au téléphone a été très polie et nous a offert un service au-delà de ce que nous attendions. Elle a été rapide, efficace et semblait aimer son travail. Merci à toi !\n\nCuisine : 5 · Service : 5 · Temps d'attente : aucune attente"
+  },
+  r3:{
+    short:"J'ai récemment eu l'occasion de découvrir ce petit restaurant de pizza qui cache bien son jeu ! Dès l'entrée, l'ambiance chaleureuse et conviviale m'a mis en appétit...",
+    full:"J'ai récemment eu l'occasion de découvrir ce petit restaurant de pizza qui cache bien son jeu ! Dès l'entrée, l'ambiance chaleureuse et conviviale m'a mis en appétit. Le personnel était super sympa et accueillant, on se sentait déjà comme à la maison.\n\nLa carte propose une variété de pizzas délicieuses, allant des classiques aux options plus originales. J'ai opté pour la « Spéciale Maison » et je n'ai pas été déçu ! La pâte était fine et croustillante juste comme il faut, et les ingrédients étaient frais et généreusement portionnés. Les saveurs étaient parfaitement équilibrées et chaque bouchée était un pur plaisir.\n\nLe rapport qualité-prix est vraiment excellent, surtout compte tenu de la générosité des portions. Je recommande vivement ce restaurant à tous les amateurs de pizza ! On y retournera assurément pour tester d'autres options de la carte !\n\nCuisine : 5 · Service : 5 · Ambiance : 5"
+  }
+};
+function toggleReview(btn){
+  const p=btn.previousElementSibling;
+  const id=p.dataset.id;
+  const expanded=btn.dataset.x==='1';
+  if(expanded){
+    p.innerHTML=REVIEWS[id].short;
+    btn.textContent='Voir plus…';
+    btn.dataset.x='0';
+  }else{
+    p.innerHTML=REVIEWS[id].full.replace(/\n\n/g,'<br><br>');
+    btn.textContent='Voir moins';
+    btn.dataset.x='1';
+  }
+}
+
+// ═══ CART STATE ══════════════════════════════════════════════════
+let cart=[], modalItem=null, modalSizes=null;
+
+// ═══ BUILD MENU ═══════════════════════════════════════════════════
+const tabsEl=document.getElementById('menuTabs');
+const panelsEl=document.getElementById('menuPanels');
+MENU.forEach((cat,ci)=>{
+  const t=document.createElement('button');
+  t.className='mtab'+(ci===0?' active':'');
+  t.textContent=cat.label;
+  t.dataset.id=cat.id;
+  t.addEventListener('click',()=>switchTab(cat.id));
+  tabsEl.appendChild(t);
+
+  const p=document.createElement('div');
+  p.className='mpanel'+(ci===0?' active':'');
+  p.id='panel-'+cat.id;
+  let h='<div class="mgrid">';
+  cat.items.forEach((item,ii)=>{
+    h+=`<div class="mcard fu">
+      <div class="mcard-cat">${cat.label}</div>
+      <div class="mcard-name">${item.name}</div>
+      <div class="mcard-desc">${item.desc}</div>
+      <div class="mcard-foot">
+        <span class="mcard-price">${item.price}</span>
+        <button class="add-btn" data-key="${cat.id}::${ii}" onclick="openModal('${cat.id}',${ii})" aria-label="Ajouter">＋</button>
+      </div>
+    </div>`;
+  });
+  h+='</div>';
+  if(cat.note) h+=`<p class="menu-note">ℹ ${cat.note}</p>`;
+  p.innerHTML=h; panelsEl.appendChild(p);
+});
+
+function switchTab(id){
+  document.querySelectorAll('.mtab').forEach(t=>t.classList.toggle('active',t.dataset.id===id));
+  document.querySelectorAll('.mpanel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+id));
+  observeFU();
+}
+
+// ═══ MODAL ════════════════════════════════════════════════════════
+function openModal(catId,ii){
+  const cat=MENU.find(c=>c.id===catId);
+  const item=cat.items[ii];
+  modalItem={catId,ii,item,catLabel:cat.label};
+  modalSizes=cat.sizes;
+  document.getElementById('modal-name').textContent=item.name;
+  document.getElementById('modal-desc').textContent=item.desc;
+  document.getElementById('modal-price').textContent=item.price;
+  document.getElementById('mQty').value=1;
+  document.getElementById('mNote').value='';
+  updAddPrice();
+  const ss=document.getElementById('modal-sizes-sec');
+  const sd=document.getElementById('modal-sizes');
+  sd.innerHTML='';
+  if(cat.sizes){
+    ss.style.display='';
+    cat.sizes.forEach((s,i)=>{
+      sd.innerHTML+=`<div class="mso"><input type="radio" name="msize" id="ms${i}" value="${s}"${(s==='14″'||i===0)?'checked':''}><label for="ms${i}">${s}</label></div>`;
+    });
+    if(cat.sizes.includes('14″')){const el=document.getElementById('ms'+cat.sizes.indexOf('14″'));if(el)el.checked=true;}
+  } else ss.style.display='none';
+  document.getElementById('itemModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('itemModal').classList.remove('open');document.body.style.overflow='';}
+function chgQty(d){const e=document.getElementById('mQty');e.value=Math.max(1,Math.min(20,+e.value+d));updAddPrice();}
+function updAddPrice(){if(!modalItem)return;const q=+document.getElementById('mQty').value||1;document.getElementById('mAddPrice').textContent=(modalItem.item.pn*q).toFixed(2).replace('.',',')+' $';}
+document.getElementById('mQty').addEventListener('change',updAddPrice);
+function confirmAdd(){
+  if(!modalItem)return;
+  const qty=+document.getElementById('mQty').value||1;
+  const note=document.getElementById('mNote').value.trim();
+  const sEl=document.querySelector('input[name=msize]:checked');
+  const size=sEl?sEl.value:null;
+  cart.push({id:Date.now()+Math.random(),name:modalItem.item.name,cat:modalItem.catLabel,price:modalItem.item.price,pn:modalItem.item.pn,size,qty,note});
+  const btn=document.querySelector(`[data-key="${modalItem.catId}::${modalItem.ii}"]`);
+  if(btn){btn.classList.add('added');setTimeout(()=>btn.classList.remove('added'),600);}
+  closeModal();
+  renderCart(); updateFAB(); updatePreview();
+  showToast(`✓ ${modalItem.item.name} ajouté au panier`);
+}
+document.getElementById('itemModal').addEventListener('click',e=>{if(e.target===document.getElementById('itemModal'))closeModal();});
+
+// ═══ CART ══════════════════════════════════════════════════════════
+function renderCart(){
+  const el=document.getElementById('drItems');
+  const sub=document.getElementById('drSub');
+  const tot=document.getElementById('drTotal');
+  const grand=document.getElementById('drGrand');
+  const cnt=document.getElementById('drCount');
+  const waB=document.getElementById('drBtnWa');
+  const mlB=document.getElementById('drBtnMl');
+  const total=cart.reduce((s,c)=>s+c.pn*c.qty,0);
+  const count=cart.reduce((s,c)=>s+c.qty,0);
+  cnt.textContent=count+' article'+(count!==1?'s':'');
+  if(!cart.length){
+    el.innerHTML=`<div class="cart-empty"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg><p>Panier vide</p><a href="#menu" onclick="closeCart()">Parcourir le menu →</a></div>`;
+    sub.style.display='none'; waB.disabled=mlB.disabled=true; return;
+  }
+  let h='';
+  cart.forEach(c=>{
+    h+=`<div class="ci"><div class="ci-top"><div><div class="ci-name">${c.name}</div><div class="ci-meta">${c.cat}${c.size?' · '+c.size:''}</div>${c.note?`<div class="ci-note">📝 ${c.note}</div>`:''}</div><button class="ci-rm" onclick="rmItem(${c.id})">✕</button></div><div class="ci-bot"><div class="ciqty"><button class="ciqb" onclick="chgItem(${c.id},-1)">−</button><div class="ciqv">${c.qty}</div><button class="ciqb" onclick="chgItem(${c.id},1)">+</button></div><span class="ci-price">${(c.pn*c.qty).toFixed(2).replace('.',',')} $</span></div></div>`;
+  });
+  el.innerHTML=h; sub.style.display='';
+  tot.textContent=grand.textContent=total.toFixed(2).replace('.',',')+' $';
+  waB.disabled=mlB.disabled=false;
+}
+function rmItem(id){cart=cart.filter(c=>c.id!==id);renderCart();updateFAB();updatePreview();}
+function chgItem(id,d){const c=cart.find(x=>x.id===id);if(c){c.qty=Math.max(1,c.qty+d);renderCart();updateFAB();updatePreview();}}
+function updateFAB(){const n=cart.reduce((s,c)=>s+c.qty,0);const b=document.getElementById('cartBadge');b.textContent=n;b.classList.toggle('show',n>0);}
+function updatePreview(){
+  const cnt=document.getElementById('ocp-count');
+  const body=document.getElementById('ocp-body');
+  const n=cart.reduce((s,c)=>s+c.qty,0);
+  cnt.textContent=n>0?n+' article'+(n!==1?'s':'')+' dans le panier':'Panier vide';
+  if(!cart.length){body.innerHTML='<div class="cp-empty">Parcourez le menu et cliquez <strong style="color:var(--red)">+</strong></div>';return;}
+  let h='';cart.forEach(c=>{h+=`<div class="cp-item"><span class="cp-item-n">${c.name}${c.size?' ('+c.size+')':''}</span><span class="cp-item-q">×${c.qty}</span><span class="cp-item-p">${(c.pn*c.qty).toFixed(2).replace('.',',')} $</span></div>`;});
+  body.innerHTML=h;
+}
+function openCart(){document.getElementById('cartDr').classList.add('open');document.getElementById('cartOv').classList.add('open');document.body.style.overflow='hidden';renderCart();}
+function closeCart(){document.getElementById('cartDr').classList.remove('open');document.getElementById('cartOv').classList.remove('open');document.body.style.overflow='';}
+
+// ═══ ORDER MESSAGES ════════════════════════════════════════════════
+function buildMsg(n,ph,em,pp,tm,tp,nt){
+  const total=cart.reduce((s,c)=>s+c.pn*c.qty,0);
+  const lines=cart.map(c=>`• ${c.qty}x ${c.name}${c.size?' ('+c.size+')':''}${c.note?' — '+c.note:''} → ${(c.pn*c.qty).toFixed(2).replace('.',',')} $`).join('\n');
+  return `🍕 *COMMANDE — DIMDIM PIZZA MIRABEL*\n\n👤 *Nom :* ${n}\n📞 *Téléphone :* ${ph}\n${em?'✉ *Courriel :* '+em+'\n':''}👥 *Personnes :* ${pp}\n🕐 *Heure :* ${tm||'Dès que possible'}\n📦 *Type :* ${tp}\n\n🛒 *ARTICLES :*\n${lines}\n\n💰 *Sous-total estimé :* ${total.toFixed(2).replace('.',',')} $${nt?'\n\n💬 *Notes :* '+nt:''}\n\nMerci ! 😊`;
+}
+function validate(pre){
+  const n=document.getElementById(pre+'name').value.trim();
+  const ph=document.getElementById(pre+'phone').value.trim();
+  if(!n){alert('Veuillez entrer votre nom.');return null;}
+  if(!ph){alert('Veuillez entrer votre téléphone.');return null;}
+  if(!cart.length){alert('Votre panier est vide. Ajoutez des articles depuis le menu.');return null;}
+  return {n,ph,em:document.getElementById(pre+'email').value,pp:document.getElementById(pre+'people').value,tm:document.getElementById(pre+'time').value,tp:document.querySelector(`input[name=${pre==='f-'?'ftype':'cftype'}]:checked`).value,nt:document.getElementById(pre+'notes').value};
+}
+function cartWA(){const d=validate('cf-');if(!d)return;window.open('https://wa.me/14504313555?text='+encodeURIComponent(buildMsg(d.n,d.ph,d.em,d.pp,d.tm,d.tp,d.nt)),'_blank');}
+function cartMail(){const d=validate('cf-');if(!d)return;const subj='Commande Dimdim Pizza Mirabel — '+d.n;window.location.href=`mailto:commandes@didimpizza.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(buildMsg(d.n,d.ph,d.em,d.pp,d.tm,d.tp,d.nt).replace(/\*/g,''))}`;}
+function orderWhatsApp(){const d=validate('f-');if(!d)return;window.open('https://wa.me/14504313555?text='+encodeURIComponent(buildMsg(d.n,d.ph,d.em,d.pp,d.tm,d.tp,d.nt)),'_blank');}
+function orderEmail(){const d=validate('f-');if(!d)return;const subj='Commande Dimdim Pizza Mirabel — '+d.n;window.location.href=`mailto:commandes@didimpizza.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(buildMsg(d.n,d.ph,d.em,d.pp,d.tm,d.tp,d.nt).replace(/\*/g,''))}`;}
+
+// ═══ TOAST ════════════════════════════════════════════════════════
+let toastT;
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2800);}
+
+// ═══ NAV ══════════════════════════════════════════════════════════
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+document.getElementById('ham').addEventListener('click',()=>document.getElementById('mnav').classList.add('open'));
+document.getElementById('mnavX').addEventListener('click',()=>document.getElementById('mnav').classList.remove('open'));
+document.querySelectorAll('.mnl').forEach(l=>l.addEventListener('click',()=>document.getElementById('mnav').classList.remove('open')));
+
+// ═══ HOURS HIGHLIGHT ══════════════════════════════════════════════
+(()=>{const d=new Date().getDay();const m={0:['oh-dim','ht-dim'],1:['oh-lun','ht-lun'],2:['oh-lun','ht-lun'],3:['oh-lun','ht-lun'],4:['oh-jeu','ht-jeu'],5:['oh-ven','ht-ven'],6:['oh-ven','ht-ven']};(m[d]||[]).forEach(id=>{const e=document.getElementById(id);if(e)e.classList.add('today');});})();
+
+// ═══ FADE UP ══════════════════════════════════════════════════════
+function observeFU(){
+  const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}});},{threshold:.08});
+  document.querySelectorAll('.fu:not(.vis)').forEach(el=>obs.observe(el));
+}
+observeFU();
+
+// ═══ ESC CLOSE ════════════════════════════════════════════════════
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeCart();}});
+
+// init
+renderCart(); updatePreview();
+</script>
+</body>
+</html>
